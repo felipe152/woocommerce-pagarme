@@ -709,6 +709,8 @@ class WC_Pagarme_API {
 	 */
 	protected function save_order_meta_fields( $id, $data ) {
 
+		do_action('wc_pagarme_before_save_order_meta_fields', $id, $data);
+
 		// Transaction data.
 		$payment_data = array_map(
 			'sanitize_text_field',
@@ -747,6 +749,8 @@ class WC_Pagarme_API {
 
 			$order->save();
 		}
+
+		do_action('wc_pagarme_after_save_order_meta_fields', $id, $data);
 	}
 
 	/**
